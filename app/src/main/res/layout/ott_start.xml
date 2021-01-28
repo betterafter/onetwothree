@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="8"
+        android:orientation="vertical">
+
+
+
+        <TextView
+            android:id="@+id/ott_start_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/color2"
+            android:layout_weight="4"
+            android:gravity="bottom|center"
+            android:paddingBottom="50dp"
+            android:fontFamily="@font/comfortaa_light"
+            android:paddingHorizontal="50dp"
+            android:text="Two Three \nFive"
+            android:textColor="@color/white"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/ott_start_play_button"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="top|center"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/game_start_play_button"
+            tools:ignore="VectorDrawableCompat" />
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+]
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

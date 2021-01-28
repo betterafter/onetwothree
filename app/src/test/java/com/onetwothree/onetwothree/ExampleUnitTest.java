@@ -1,4 +1,4 @@
-package com.example.onetwothree;
+package com.onetwothree.onetwothree;
 
 import org.junit.Test;
 

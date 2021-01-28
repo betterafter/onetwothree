@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "686283142305",
+    "project_id": "two-three-five-43782262",
+    "storage_bucket": "two-three-five-43782262.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686283142305:android:422586d16ca15a96ba6ce0",
+        "android_client_info": {
+          "package_name": "com.onetwothree.onetwothree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "686283142305-2hh9ui7sjrmj89apntkov8bv2ji5m5mm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.onetwothree.onetwothree",
+            "certificate_hash": "dca60a60806f690436266ed22e9413aaf48a3b51"
+          }
+        },
+        {
+          "client_id": "686283142305-kni3a4i9fo54516596dpsorgf5hgp6ov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrTnePnayaffq88graYIRboYZ-TEO0Gj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "686283142305-kni3a4i9fo54516596dpsorgf5hgp6ov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
