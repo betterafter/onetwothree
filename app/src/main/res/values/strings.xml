@@ -6,4 +6,14 @@
     <!--package_name-->
     <string name="package_name" translatable="false"></string>
     <string name="leaderboard_id">CgkIoemmzfwTEAIQAQ</string>
+
+    <string name="achievement_1">CgkIoemmzfwTEAIQAg</string>
+    <string name="achievement_2">CgkIoemmzfwTEAIQAw</string>
+    <string name="achievement_3">CgkIoemmzfwTEAIQBA</string>
+    <string name="achievement_4">CgkIoemmzfwTEAIQBQ</string>
+    <string name="achievement_5">CgkIoemmzfwTEAIQBg</string>
+    <string name="achievement_6">CgkIoemmzfwTEAIQBw</string>
+    <string name="achievement_7">CgkIoemmzfwTEAIQCA</string>
+    <string name="achievement_8">CgkIoemmzfwTEAIQCQ</string>
+
 </resources>

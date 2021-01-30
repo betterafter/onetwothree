@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -29,6 +30,13 @@ android {
     }
 }
 
+dependencies {
+    // AndroidX를 사용하는 경우
+    implementation 'androidx.multidex:multidex:2.0.1'
+    // AndroidX를 사용하지 않는 경우
+    implementation 'com.android.support:multidex:1.0.3'
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
@@ -40,7 +48,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.1.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
+
+    implementation 'com.google.android.gms:play-services-ads:19.6.0'
     implementation 'com.google.android.gms:play-services-games:21.0.0'
+
+
+
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
     implementation 'androidx.appcompat:appcompat:1.2.0'

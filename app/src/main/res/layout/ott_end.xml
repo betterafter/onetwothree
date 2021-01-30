@@ -16,8 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
-            android:layout_gravity="center"
+            android:layout_weight="3"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -37,7 +36,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/comfortaa_light"
-                android:paddingBottom="50dp"
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -48,23 +46,52 @@
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="7"
         android:layout_gravity="center"
         android:gravity="top|center"
         android:layout_marginBottom="50dp"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/ott_end_replay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_margin="10dp"
-            android:background="@color/fui_transparent"
-            app:srcCompat="@drawable/round_replay_24"
-            tools:ignore="VectorDrawableCompat" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|top"
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-    </LinearLayout>
+                <ImageButton
+                    android:id="@+id/ott_end_replay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/fui_transparent"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/round_replay_24"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <ImageButton
+                    android:id="@+id/ott_end_continue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/round_movie_24" />
+
+                <TextView
+                    android:id="@+id/ad_achievement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/comfortaa_light"
+                    android:text="광고보고 이어하기 ( 3번까지 가능 )"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,6 +109,24 @@
                 android:layout_margin="10dp"
                 android:background="@color/white"
                 app:srcCompat="@drawable/round_leaderboard_24" />
+
+            <ImageButton
+                android:id="@+id/ott_start_achievement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                app:srcCompat="@drawable/round_emoji_events_24" />
+
+            <ImageButton
+                android:id="@+id/ott_start_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                app:srcCompat="@drawable/round_share_24" />
 
             <ImageButton
                 android:id="@+id/ott_end_close"

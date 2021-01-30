@@ -2,6 +2,10 @@ package com.onetwothree.onetwothree;
 
 import android.os.Bundle;
 
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -17,16 +21,43 @@ import androidx.fragment.app.FragmentTransaction;
 public class MainActivity extends AppCompatActivity {
 
     double resultScore = 0;
+    public int replayScore = 0;
+    public int replayCount = 0;
+
+    private final int REQCODE = 1001;
+
+    public InterstitialAd mInterstitialAd;
+    public boolean isAdShown = false;
+
+    public AchievementManager achievementManager;
+    public SoundManager soundManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        soundManager = new SoundManager(this);
+        soundManager.addSound(0, R.raw.button);
+        soundManager.addSound(1, R.raw.correct);
+        soundManager.addSound(2, R.raw.move);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-5909086836185335/3643553736");
+
+        achievementManager = new AchievementManager(this, findViewById(R.id.main_framelayout));
+
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.add(R.id.main_framelayout, new GameStartFragment(this));
         fragmentTransaction.commit();
+
     }
 
 

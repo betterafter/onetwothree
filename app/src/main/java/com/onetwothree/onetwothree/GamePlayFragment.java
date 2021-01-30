@@ -4,8 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -27,10 +31,18 @@ public class GamePlayFragment extends Fragment {
 
     private Button button1, button2, button3;
     private ToggleButton toggleButton1, toggleButton2, toggleButton3, toggleButton4;
-    private int toggleType = -1;
+    private ImageView button_highlight;
+    private LinearLayout operator_layout;
+
+    private int toggleType = 1;
 
     private ProgressBar progressBar;
     private TextView ott_play_score;
+
+    private int[] position;
+    private float posY;
+
+    private boolean buttonSoundPlay = false;
 
     public GamePlayFragment(MainActivity mainActivity){
         this.mainActivity = mainActivity;
@@ -41,6 +53,7 @@ public class GamePlayFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,7 +62,7 @@ public class GamePlayFragment extends Fragment {
 
         progressBar = mainView.findViewById(R.id.progressBar);
         progressBar.setIndeterminate(false);
-        
+
         ott_play_score = mainView.findViewById(R.id.ott_play_score);
         TextView ott_play_current = mainView.findViewById(R.id.ott_play_current);
         TextView ott_play_next =  mainView.findViewById(R.id.ott_play_next);
@@ -59,12 +72,73 @@ public class GamePlayFragment extends Fragment {
         int c = (int)(Math.random() * 3) + 1;
 
         int makeCurrentText = 1 * a + 2 * b + 3 * c;
+        ott_play_score.setText(Integer.toString(mainActivity.replayScore));
         ott_play_next.setText(Integer.toString(makeCurrentText));
+
+        operator_layout = mainView.findViewById(R.id.operator_layout);
+        button_highlight = mainView.findViewById(R.id.button_highlight);
+
+        operator_layout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if(operator_layout.getHeight() != 0){
+                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT, operator_layout.getHeight() / 4
+                    );
+                    button_highlight.setLayoutParams(params);
+
+                    posY = operator_layout.getHeight() / 4;
+                    position = new int[]{0, (int)posY, (int)posY * 2, (int)posY * 3};
+                    operator_layout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+            }
+        });
 
         toggleButton1 = mainView.findViewById(R.id.button_add);
         toggleButton2 = mainView.findViewById(R.id.button_minus);
         toggleButton3 = mainView.findViewById(R.id.button_multiple);
         toggleButton4 = mainView.findViewById(R.id.button_division);
+
+        toggleButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.soundManager.playSound(2);
+            }
+        });
+        toggleButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.soundManager.playSound(2);
+            }
+        });
+        toggleButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.soundManager.playSound(2);
+            }
+        });
+        toggleButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.soundManager.playSound(2);
+            }
+        });
+
+        MoveButtonHighlight moveButtonHighlight = new MoveButtonHighlight();
+        moveButtonHighlight.start();
+
+        // 초기화
+        toggleButton2.setChecked(false);
+        toggleButton3.setChecked(false);
+        toggleButton4.setChecked(false);
+        toggleButton1.setChecked(true);
+
+        toggleType = 1;
+        toggleButton1.setTextColor(getActivity().getResources().getColor(R.color.white));
+        toggleButton2.setTextColor(getActivity().getResources().getColor(R.color.black));
+        toggleButton3.setTextColor(getActivity().getResources().getColor(R.color.black));
+        toggleButton4.setTextColor(getActivity().getResources().getColor(R.color.black));
+        //..............................
 
         toggleButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -158,35 +232,84 @@ public class GamePlayFragment extends Fragment {
         return mainView;
     }
 
+    private class MoveButtonHighlight extends Thread {
+        public void run() {
+            while(time < 5){
+                if(position == null) continue;
+                float move = posY / 12;
+                try{
+                    if(button_highlight.getY() < position[toggleType - 1]){
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    button_highlight.setY(button_highlight.getY() + move);
+                                }
+                                catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+                    else if(button_highlight.getY() > position[toggleType - 1]){
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    button_highlight.setY(button_highlight.getY() - move);
+                                }
+                                catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+
+                    if(Math.abs(button_highlight.getY() - position[toggleType - 1]) <= move * 10){
+                        button_highlight.setY(position[toggleType - 1]);
+                    }
+                    sleep(1);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+
     private void setToggleButtonTextColor(int num){
+
         if(num == 1){
-            toggleButton1.setTextColor(getActivity().getResources().getColor(R.color.color2));
+            toggleButton1.setTextColor(getActivity().getResources().getColor(R.color.white));
             toggleButton2.setTextColor(getActivity().getResources().getColor(R.color.black));
             toggleButton3.setTextColor(getActivity().getResources().getColor(R.color.black));
             toggleButton4.setTextColor(getActivity().getResources().getColor(R.color.black));
         }
         else if(num == 2){
             toggleButton1.setTextColor(getActivity().getResources().getColor(R.color.black));
-            toggleButton2.setTextColor(getActivity().getResources().getColor(R.color.color2));
+            toggleButton2.setTextColor(getActivity().getResources().getColor(R.color.white));
             toggleButton3.setTextColor(getActivity().getResources().getColor(R.color.black));
             toggleButton4.setTextColor(getActivity().getResources().getColor(R.color.black));
         }
         else if(num == 3){
             toggleButton1.setTextColor(getActivity().getResources().getColor(R.color.black));
             toggleButton2.setTextColor(getActivity().getResources().getColor(R.color.black));
-            toggleButton3.setTextColor(getActivity().getResources().getColor(R.color.color2));
+            toggleButton3.setTextColor(getActivity().getResources().getColor(R.color.white));
             toggleButton4.setTextColor(getActivity().getResources().getColor(R.color.black));
         }
         else if(num == 4){
             toggleButton1.setTextColor(getActivity().getResources().getColor(R.color.black));
             toggleButton2.setTextColor(getActivity().getResources().getColor(R.color.black));
             toggleButton3.setTextColor(getActivity().getResources().getColor(R.color.black));
-            toggleButton4.setTextColor(getActivity().getResources().getColor(R.color.color2));
+            toggleButton4.setTextColor(getActivity().getResources().getColor(R.color.white));
         }
     }
 
     private void buttonClick(TextView current, TextView next, double i){
 
+        mainActivity.soundManager.playSound(0);
         // 연산하는 부분
         double currentText = Double.parseDouble(current.getText().toString());
         double nextText =  Double.parseDouble(next.getText().toString());
@@ -204,7 +327,10 @@ public class GamePlayFragment extends Fragment {
 
         // 숫자가 같아질 경우 = 옳은 답을 냈을 경우
         if(calc == nextText){
+            if(time >= 4.999f) return;
             button1.setEnabled(false); button2.setEnabled(false); button3.setEnabled(false);
+
+            mainActivity.soundManager.playSound(1);
             ott_play_score
                     .setText(Integer.toString(Integer.parseInt(ott_play_score.getText().toString()) + (int)calc));
 
@@ -227,17 +353,6 @@ public class GamePlayFragment extends Fragment {
             nextNumber = new changeNextNumber(result, next);
             nextNumber.start();
             time = 0;
-        }
-
-        if(nextText > currentText && calc > nextText){
-            mainActivity.setResultScore(Integer.parseInt(ott_play_score.getText().toString()));
-            mainActivity.switchFragment(2);
-            gameOver = true;
-        }
-        else if(nextText < currentText && calc < nextText){
-            mainActivity.setResultScore(Integer.parseInt(ott_play_score.getText().toString()));
-            mainActivity.switchFragment(2);
-            gameOver = true;
         }
     }
 
@@ -281,10 +396,16 @@ public class GamePlayFragment extends Fragment {
         public void run(){
             while(!gameOver){
                 try {
-                    time += 0.002f;
-                    System.out.println(time);
+                    double tempTime = time;
+                    if(Integer.parseInt(ott_play_score.getText().toString()) <= 1000) time += 0.001f;
+                    else if(Integer.parseInt(ott_play_score.getText().toString()) <= 5000) time += 0.0015f;
+                    else if(Integer.parseInt(ott_play_score.getText().toString()) <= 15000) time += 0.00175f;
+                    else if(Integer.parseInt(ott_play_score.getText().toString()) <= 30000) time += 0.002f;
+                    else if(Integer.parseInt(ott_play_score.getText().toString()) <= 50000) time += 0.0022f;
+                    else time += 0.0025f;
+                    if(mainActivity.isAdShown) time = tempTime;
                     progressBar.setProgress((int)((5 - time) * 20));
-                    if(time >= 5 || gameOver){
+                    if(time >= 5){
                         timeChecker = null;
                         mainActivity.setResultScore(Double.parseDouble(ott_play_score.getText().toString()));
                         mainActivity.switchFragment(2);

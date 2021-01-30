@@ -99,63 +99,80 @@
                 android:weightSum="5"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_weight="1">
 
-                    <ToggleButton
-                        android:id="@+id/button_add"
+                    <ImageView
+                        android:id="@+id/button_highlight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/button_highlight" />
+
+                    <LinearLayout
+                        android:id="@+id/operator_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="+"
-                        android:textOff="+"
-                        android:textOn="+"
-                        android:background="@color/fui_transparent"
-                        android:textColor="@drawable/toggle_button"
-                        android:textSize="40sp" />
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
 
-                    <ToggleButton
-                        android:id="@+id/button_minus"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="ToggleButton"
-                        android:textOff="-"
-                        android:textOn="-"
-                        android:background="@color/fui_transparent"
-                        android:textColor="@drawable/toggle_button"
-                        android:textSize="40sp" />
+                        <ToggleButton
+                            android:id="@+id/button_add"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="+"
+                            android:textOff="+"
+                            android:textOn="+"
+                            android:background="@color/fui_transparent"
+                            android:textColor="@drawable/toggle_button"
+                            android:textSize="40sp" />
 
-                    <ToggleButton
-                        android:id="@+id/button_multiple"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="ToggleButton"
-                        android:textOff="×"
-                        android:textOn="×"
-                        android:background="@color/fui_transparent"
-                        android:textColor="@drawable/toggle_button"
-                        android:textSize="40sp" />
+                        <ToggleButton
+                            android:id="@+id/button_minus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="ToggleButton"
+                            android:textOff="-"
+                            android:textOn="-"
+                            android:background="@color/fui_transparent"
+                            android:textColor="@drawable/toggle_button"
+                            android:textSize="40sp" />
 
-                    <ToggleButton
-                        android:id="@+id/button_division"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="ToggleButton"
-                        android:textOff="÷"
-                        android:textOn="÷"
-                        android:background="@color/fui_transparent"
-                        android:textColor="@drawable/toggle_button"
-                        android:textSize="40sp" />
+                        <ToggleButton
+                            android:id="@+id/button_multiple"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="ToggleButton"
+                            android:textOff="×"
+                            android:textOn="×"
+                            android:background="@color/fui_transparent"
+                            android:textColor="@drawable/toggle_button"
+                            android:textSize="40sp" />
 
-                </LinearLayout>
+                        <ToggleButton
+                            android:id="@+id/button_division"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="ToggleButton"
+                            android:textOff="÷"
+                            android:textOn="÷"
+                            android:background="@color/fui_transparent"
+                            android:textColor="@drawable/toggle_button"
+                            android:textSize="40sp" />
+
+                    </LinearLayout>
+
+
+
+                </FrameLayout>
+
 
                 <FrameLayout
                     android:layout_width="0dp"

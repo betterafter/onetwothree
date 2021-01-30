@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -25,6 +26,8 @@ import androidx.fragment.app.Fragment;
 public class GameStartFragment extends Fragment {
 
     private MainActivity mainActivity;
+
+    ImageButton start_play_button;
     public View mainView;
 
     private static final int REQCODE = 100;
@@ -41,12 +44,12 @@ public class GameStartFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        signIn();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        signIn();
     }
 
     @Nullable
@@ -56,10 +59,12 @@ public class GameStartFragment extends Fragment {
 
         mainView = inflater.inflate(R.layout.ott_start, container, false);
 
-        ImageButton start_play_button = mainView.findViewById(R.id.ott_start_play_button);
+        start_play_button = mainView.findViewById(R.id.ott_start_play_button);
+        start_play_button.setVisibility(View.INVISIBLE);
         start_play_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonTouchSound();
                 mainActivity.switchFragment(1);
             }
         });
@@ -77,13 +82,11 @@ public class GameStartFragment extends Fragment {
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivity());
         if (GoogleSignIn.hasPermissions(account, signInOptions.getScopeArray())) {
-            // Already signed in.
-            // The signed in account is stored in the 'account' variable.
-            System.out.println("Already signed in.");
             GoogleSignInAccount signedInAccount = account;
             GamesClient gamesClient = Games.getGamesClient(getActivity(), signedInAccount);
             gamesClient.setViewForPopups(mainView);
 
+            Toast.makeText(getActivity().getApplicationContext(), "구글 플레이에 로그인 되었습니다.", Toast.LENGTH_SHORT).show();
         } else {
             // Haven't been signed-in before. Try the silent sign-in first.
             System.out.println("Haven't been signed-in before. Try the silent sign-in first.");
@@ -99,13 +102,21 @@ public class GameStartFragment extends Fragment {
                                         GoogleSignInAccount signedInAccount = task.getResult();
                                         GamesClient gamesClient = Games.getGamesClient(getActivity(), signedInAccount);
                                         gamesClient.setViewForPopups(mainView);
+
+                                        Toast.makeText(getActivity().getApplicationContext(), "구글 플레이에 로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+
                                     } else {
-                                        System.out.println("failed");
                                         startSignInIntent();
                                     }
                                 }
                             });
         }
+
+        start_play_button.setVisibility(View.VISIBLE);
+    }
+
+    private void buttonTouchSound(){
+        mainActivity.soundManager.playSound(0);
     }
 
     private void startSignInIntent() {
@@ -125,6 +136,11 @@ public class GameStartFragment extends Fragment {
                 GoogleSignInAccount signedInAccount = result.getSignInAccount();
                 GamesClient gamesClient = Games.getGamesClient(getActivity(), signedInAccount);
                 gamesClient.setViewForPopups(mainView);
+
+                Toast.makeText(getActivity().getApplicationContext(), "구글 플레이에 로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getActivity().getApplicationContext(), "구글 플레이 로그인에 실패했습니다. 게임 내용이 저장되지 않을 수 있씁니다.", Toast.LENGTH_SHORT).show();
             }
         }
     }
