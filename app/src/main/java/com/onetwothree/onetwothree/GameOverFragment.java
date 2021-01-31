@@ -104,6 +104,7 @@ public class GameOverFragment extends Fragment {
                     Toast.makeText(getActivity(), "3번의 기회를 모두 사용하셨어요. 재도전 해보세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                end_replay.setEnabled(false);
 
                 mainActivity.mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
@@ -113,6 +114,8 @@ public class GameOverFragment extends Fragment {
                         super.onAdClosed();
                         mainActivity.replayScore = (int)mainActivity.getResultScore();
                         mainActivity.replayCount++;
+
+                        end_replay.setEnabled(true);
 
                         mainActivity.switchFragment(1);
                     }
