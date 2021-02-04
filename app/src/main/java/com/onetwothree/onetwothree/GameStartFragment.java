@@ -77,7 +77,6 @@ public class GameStartFragment extends Fragment {
 
         GoogleSignInOptions signInOptions
                 = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
-                .requestServerAuthCode(getString(R.string.default_web_client_id))
                 .build();
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivity());
@@ -140,7 +139,7 @@ public class GameStartFragment extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(), "구글 플레이에 로그인 되었습니다.", Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(getActivity().getApplicationContext(), "구글 플레이 로그인에 실패했습니다. 게임 내용이 저장되지 않을 수 있씁니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "구글 플레이 로그인에 실패했습니다. 게임 내용이 저장되지 않을 수 있습니다.", Toast.LENGTH_SHORT).show();
             }
         }
     }

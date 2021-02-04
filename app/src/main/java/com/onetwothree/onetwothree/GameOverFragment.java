@@ -105,6 +105,11 @@ public class GameOverFragment extends Fragment {
                     return;
                 }
                 end_replay.setEnabled(false);
+                end_achievement.setEnabled(false);
+                end_close.setEnabled(false);
+                end_leaderboard.setEnabled(false);
+                end_share.setEnabled(false);
+
 
                 mainActivity.mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
@@ -116,6 +121,10 @@ public class GameOverFragment extends Fragment {
                         mainActivity.replayCount++;
 
                         end_replay.setEnabled(true);
+                        end_achievement.setEnabled(true);
+                        end_close.setEnabled(true);
+                        end_leaderboard.setEnabled(true);
+                        end_share.setEnabled(true);
 
                         mainActivity.switchFragment(1);
                     }
