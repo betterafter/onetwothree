@@ -228,6 +228,7 @@ public class GamePlayFragment extends Fragment {
         time = 0;
         if(timeChecker != null) timeChecker = null;
         timeChecker = new timeChecker();
+        timeChecker.setPriority(10);
         timeChecker.start();
         return mainView;
     }

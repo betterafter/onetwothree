@@ -88,7 +88,6 @@ public class GameStartFragment extends Fragment {
             Toast.makeText(getActivity().getApplicationContext(), "구글 플레이에 로그인 되었습니다.", Toast.LENGTH_SHORT).show();
         } else {
             // Haven't been signed-in before. Try the silent sign-in first.
-            System.out.println("Haven't been signed-in before. Try the silent sign-in first.");
             GoogleSignInClient signInClient = GoogleSignIn.getClient(getActivity(), signInOptions);
             signInClient
                     .silentSignIn()

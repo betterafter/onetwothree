@@ -133,6 +133,12 @@ public class GameOverFragment extends Fragment {
                     public void onAdFailedToLoad(int errorCode) {
                         super.onAdFailedToLoad(errorCode);
                         Toast.makeText(getActivity(), "광고 불러오기를 실패했습니다.", Toast.LENGTH_SHORT).show();
+
+                        end_replay.setEnabled(true);
+                        end_achievement.setEnabled(true);
+                        end_close.setEnabled(true);
+                        end_leaderboard.setEnabled(true);
+                        end_share.setEnabled(true);
                     }
 
                     @Override
